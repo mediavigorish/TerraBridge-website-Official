@@ -1,0 +1,55 @@
+TerraBridge Agri Solutions Ltd - Website deployment guide
+=========================================================
+
+WHAT THIS IS
+A complete static website: HTML, CSS, JavaScript, images, videos and fonts.
+There is no back end, database, CMS, framework or build step. Upload the files and the site is live.
+index.html is in the root of this folder.
+
+FOLDER STRUCTURE
+  index.html          Home page (the whole site is one page)
+  styles.css          Main styles
+  updates.css         Additional styles
+  script.js           Interactive features (size guide, implements, package builder)
+  .htaccess           Apache settings: HTTPS redirect, file types, caching (hidden file)
+  fonts/              Self-hosted Archivo and Source Sans 3 fonts + fonts.css + licences
+  img/                Logo, favicon, tractor and implement photos
+  assets/             Videos, video poster images, brochure previews
+  docs/               Full-size brochures and the NAFAGRO exhibitor announcement
+
+STEP 1 - UPLOAD (GoDaddy cPanel; other hosts are similar)
+1. Log in to GoDaddy > My Products > Web Hosting > Manage > cPanel Admin.
+2. Open File Manager > public_html. (Settings > tick "Show Hidden Files" so you can see .htaccess.)
+3. Delete any GoDaddy placeholder page (e.g. default index.html) from public_html.
+4. Upload the ZIP, then right-click it > Extract. Move the CONTENTS of the extracted
+   folder into public_html so that public_html/index.html exists (not public_html/site/index.html).
+   Alternatively upload by FTP (FileZilla) keeping the same structure.
+5. Delete the ZIP from public_html once extracted.
+
+STEP 2 - CONNECT THE DOMAIN (terrabridgeagri.com is registered at Namecheap)
+Option A (simplest): in Namecheap > Domain List > Manage > Nameservers, choose Custom DNS and
+enter the two GoDaddy nameservers shown in your GoDaddy hosting account. Then in GoDaddy, add the
+email (MX) records for info@terrabridgeagri.com exactly as they are today, or email will stop.
+Option B (keeps email untouched): in Namecheap > Advanced DNS, set
+   A record   @     -> GoDaddy hosting IP address (shown in cPanel, "Shared IP Address")
+   CNAME      www   -> terrabridgeagri.com
+and leave the MX / mail records as they are.
+DNS changes can take from a few minutes up to 24-48 hours.
+
+STEP 3 - HTTPS
+1. In cPanel open "SSL/TLS Status" (or GoDaddy "SSL Certificates") and issue the free certificate
+   for terrabridgeagri.com and www.terrabridgeagri.com (only works after Step 2 has taken effect).
+2. The included .htaccess then redirects every http:// visit to https:// automatically.
+   If you see a redirect loop, delete the four "RewriteXXX" lines in .htaccess.
+
+STEP 4 - CHECK
+- Open https://terrabridgeagri.com on a phone and a computer.
+- Click the menu, pick a machine size, add implements, fill the package form and press
+  "Send on WhatsApp" - WhatsApp should open with the message filled in.
+- Play the three videos and open both brochures.
+
+NOTES
+- Nothing is stored on the server: the quotation form opens the visitor's WhatsApp or email.
+- No external services are needed. Fonts are included locally (no Google Fonts call).
+- Contact links: WhatsApp wa.me/233535086004, email info@terrabridgeagri.com, tel +233535086004.
+- To update text later, edit index.html in any text editor and re-upload that one file.
